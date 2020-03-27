@@ -42,6 +42,10 @@ docker-compose up -d
 
 You can access your website at `localhost:8080`. An Apache configuration file defined a VirtualHost, you can access your website also at `mysite.local:8080`. Don't forget to add `127.0.0.1 mysite.local` on your `/etc/hosts` file. <br> To customize the VirtualHost, edit the `docker/apache/default.conf` file.
 
+## php.ini
+
+You can customize the `php.ini` file by adding/updating values on the `docker/apache/php.ini` file.
+
 ## MySQL and PhpMyAdmin
 
 - Update the environment variables on the `docker-compose.yml` file : `MYSQL_USER`, `MYSQL_PASSWORD` and `MYSQL_ROOT_PASSWORD`
