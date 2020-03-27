@@ -25,9 +25,9 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: "db"
-      MYSQL_USER: "yayo"
-      MYSQL_PASSWORD: "fR8//@xY"
-      MYSQL_ROOT_PASSWORD: "fR8//@xY"
+      MYSQL_USER: "my-username"
+      MYSQL_PASSWORD: "my-password"
+      MYSQL_ROOT_PASSWORD: "my-root-password"
     ports:
       - "3316:3306"
     expose:
