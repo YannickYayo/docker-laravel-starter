@@ -2,7 +2,8 @@ FROM php:7.3.16-apache-stretch
 
 RUN apt-get update && apt-get install -y \
     wget \
-    git
+    git \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # npm
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
@@ -20,7 +21,8 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libxml2-dev \
     libzip-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install production dependencies
 RUN apt-get update && apt-get install -y \
@@ -31,13 +33,11 @@ RUN apt-get update && apt-get install -y \
     openssh-client \
     rsync \
     unzip \
-    vim
+    vim \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Pour la récupération des durées
-RUN apt-get update && apt-get install -y ffmpeg
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ffmpeg && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PECL and PEAR extensions
 RUN pecl install \
@@ -84,6 +84,8 @@ ARG GROUP_ID
 
 RUN groupadd -f --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
+# uncomment the line below if you have permissions issues with the www-data user
+# RUN usermod -a -G www-data user 
 USER user
 
 WORKDIR /var/www/html
