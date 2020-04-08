@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get update && apt-get install -y \
     nodejs \
-    npm \
     build-essential
 
 # Install dev dependencies
@@ -29,7 +28,6 @@ RUN apt-get update && apt-get install -y \
     bash \
     git \
     mysql-client \
-    yarn \
     openssh-client \
     rsync \
     unzip \
@@ -85,7 +83,7 @@ ARG GROUP_ID
 RUN groupadd -f --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 # uncomment the line below if you have permissions issues with the www-data user
-# RUN usermod -a -G www-data user 
+# RUN usermod -a -G www-data user
 USER user
 
 WORKDIR /var/www/html
