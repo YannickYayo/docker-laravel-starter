@@ -12,8 +12,12 @@ services:
       - net.ipv4.ip_unprivileged_port_start=0
     volumes:
       - .:/var/www/html
-      - ./docker/apache/php.ini:/usr/local/etc/php/conf.d/30-custom.ini
+      - ./docker/vim/.vimrc:/home/user/.vimrc
+      - ./docker/zsh/.zshrc:/home/user/.zshrc
       - ./docker/apache/sites:/etc/apache2/sites-enabled
+      - ./docker/apache/php.ini:/usr/local/etc/php/conf.d/30-custom.ini
+      - ./docker/supervisor/laravel-worker.conf:/etc/supervisor/conf.d/laravel-worker.conf
+
     networks:
       - mynetwork
     depends_on:

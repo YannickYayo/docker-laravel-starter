@@ -3,6 +3,8 @@ FROM php:7.3.16-apache-stretch
 RUN apt-get update && apt-get install -y \
     wget \
     git \
+    zsh \
+    supervisor \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # npm
@@ -85,6 +87,12 @@ RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 # uncomment the line below if you have permissions issues with the www-data user
 # RUN usermod -a -G www-data user
 USER user
+
+# set the zsh theme
+ENV ZSH_THEME robbyrussell
+
+# run the installation script  
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 WORKDIR /var/www/html
 
