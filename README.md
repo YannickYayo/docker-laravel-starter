@@ -50,9 +50,11 @@ You can customize the `php.ini` file by adding/updating values on the `docker/ap
 
 - Update the environment variables on the `docker-compose.yml` file : `MYSQL_USER`, `MYSQL_PASSWORD` and `MYSQL_ROOT_PASSWORD`
 
-* You can access `PhpMyAdmin` at `localhost:8181`, use `db` as mysql host
+- You can access `PhpMyAdmin` at `localhost:8181`, use `db` as mysql host
 
-* Configure your `.env` file on Laravel like below :
+- You can override the `mysql` conf by writting on the `docker/mysql/custom.cnf` file
+
+- Configure your `.env` file on Laravel like below :
 
 ```bash
 DB_CONNECTION=mysql
@@ -89,3 +91,11 @@ MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+
+## Vim
+
+- A `.vimrc` file is already configured for you to get a good `Vim` experience
+
+## Zsh and Oh-My-Zsh
+
+- A `.zshrc` file and the `oh-my-zsh` framework are installed, managing your container is better now !
