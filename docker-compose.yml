@@ -6,8 +6,10 @@ services:
       args:
         USER_ID: ${USER_ID}
         GROUP_ID: ${GROUP_ID}
+    container_name: web
     ports:
       - 8080:80
+      - 9001:9001
     sysctls:
       - net.ipv4.ip_unprivileged_port_start=0
     volumes:
@@ -26,6 +28,7 @@ services:
       - redis
   db:
     image: mysql:5.7
+    container_name: db
     restart: always
     environment:
       MYSQL_DATABASE: "db"
@@ -43,6 +46,7 @@ services:
       - mynetwork
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
     ports:
       - "8181:80"
     restart: always
@@ -54,6 +58,7 @@ services:
       - mynetwork
   maildev:
     image: maildev/maildev
+    container_name: maildev
     ports:
       - "1080:80"
     networks:

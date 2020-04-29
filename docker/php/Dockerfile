@@ -50,8 +50,7 @@ RUN docker-php-ext-enable \
     redis
 
 # Configure php extensions
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-configure zip --with-libzip
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Install php extensions
 RUN docker-php-ext-install \
@@ -84,6 +83,9 @@ ARG GROUP_ID
 
 RUN groupadd -f --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
+
+RUN touch /var/run/supervisord.pid && chown user:user /var/run/supervisord.pid
+
 # uncomment the line below if you have permissions issues with the www-data user
 # RUN usermod -a -G www-data user
 USER user
@@ -91,9 +93,12 @@ USER user
 # set the zsh theme
 ENV ZSH_THEME robbyrussell
 
-# run the installation script  
+# run the installation script
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 WORKDIR /var/www/html
 
 EXPOSE 9000
+
+# start supervisor
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/laravel-worker.conf"]

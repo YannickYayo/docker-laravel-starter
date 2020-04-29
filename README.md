@@ -18,6 +18,8 @@
 
 - REDIS 5.0.5
 
+- SUPERVISOR
+
 <hr>
 
 ## Run `docker-compose`
